@@ -29,5 +29,23 @@ jobs:
     - name: Install dependencies
       run: npm install
 
+    - name: Run lint
+      run: npm run lint
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build application
+      run: npm run build
+
     - name: Start application
       run: npm start
+      env:
+        NODE_ENV: production
+
+    - name: Upload artifacts
+      if: success()
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifacts
+        path: build/
